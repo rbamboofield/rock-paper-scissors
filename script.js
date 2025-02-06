@@ -15,10 +15,16 @@ function getComputerChoice() {
     }
 }
 
+function getHumanChoice() {
+    return prompt('It\'s time for Rock, Paper or Scissors!\nPlease write "rock", "paper" or "scissors" in the prompt below.')
+}
+
 function gameRockPaperScissors() {
     console.log("It's time for Rock, Paper or Scissors!")
     console.log("Computer is making it's choice!")
     console.log("Computer picked " + getComputerChoice() + "!")
+    console.log("Now it's time for you to make your choice!")
+    console.log("User picked " + getHumanChoice() + "!")
 }
 
 gameRockPaperScissors()
