@@ -16,9 +16,24 @@ function getComputerChoice() {
 }
 
 function getHumanChoice() {
-    return prompt('It\'s time for Rock, Paper or Scissors!\nPlease write "rock", "paper" or "scissors" in the prompt below.')
+    let validChoice = 0;
+    let humanChoice = prompt('It\'s time for Rock, Paper or Scissors!\nPlease write "rock", "paper" or "scissors" in the prompt below.')
+    console.log(humanChoice)
+    humanChoice = humanChoice.toLowerCase()
+    console.log(humanChoice)
+    while (validChoice == 0) {
+        if (humanChoice == "rock" || humanChoice == "paper" || humanChoice == "scissors") {
+            validChoice++;
+        } else {
+            humanChoice = prompt('You wrote and invalid choice.\nPlease write "rock", "paper" or "scissors" in the prompt below.')
+        }
+    }
+    return humanChoice    
 }
 
+function playRound(humanChoice, computerChoice) {
+
+}
 function gameRockPaperScissors() {
     console.log("It's time for Rock, Paper or Scissors!")
     console.log("Computer is making it's choice!")
@@ -27,4 +42,10 @@ function gameRockPaperScissors() {
     console.log("User picked " + getHumanChoice() + "!")
 }
 
+
+let humanScore = 0
+let computerScore = 0
+// const humanSelection = getHumanChoice();
+// const computerSelection = getComputerChoice();
+// playRound(humanSelection, computerSelection);
 gameRockPaperScissors()
