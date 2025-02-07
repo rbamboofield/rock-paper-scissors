@@ -1,5 +1,6 @@
 function getComputerChoice() {
     let randomNumber = Math.floor(Math.random() * 3);
+    console.log("Computer is making it's choice!")
     switch (randomNumber) {
         case 0:
             return "rock"
@@ -17,35 +18,80 @@ function getComputerChoice() {
 
 function getHumanChoice() {
     let validChoice = 0;
+    console.log("Now it's time for you to make your choice!")
     let humanChoice = prompt('It\'s time for Rock, Paper or Scissors!\nPlease write "rock", "paper" or "scissors" in the prompt below.')
-    console.log(humanChoice)
     humanChoice = humanChoice.toLowerCase()
-    console.log(humanChoice)
     while (validChoice == 0) {
         if (humanChoice == "rock" || humanChoice == "paper" || humanChoice == "scissors") {
-            validChoice++;
+            validChoice = 1;
         } else {
-            humanChoice = prompt('You wrote and invalid choice.\nPlease write "rock", "paper" or "scissors" in the prompt below.')
+            humanChoice = prompt('Invalid selection.\nPlease write "rock", "paper" or "scissors" in the prompt below.')
         }
     }
     return humanChoice    
 }
 
 function playRound(humanChoice, computerChoice) {
-
+    console.log("Computer picked " + computerChoice + "!")
+    console.log("User picked " + humanChoice + "!")
+    if (humanChoice == computerChoice) {
+        console.log(`It's a draw! Both players selected ${humanChoice}!`)
+        return 0;
+    } else {
+        switch (humanChoice) {
+            case "rock":
+                if (computerChoice == "scissors") {
+                    console.log(`You win! ${humanChoice} beats ${computerChoice}!`)
+                    return 1;
+                } else if (computerChoice == "paper") {
+                    console.log(`You lose! ${computerChoice} beats ${humanChoice}!`)
+                    return 2;
+                }
+                break;
+            case "paper":
+                if (computerChoice == "rock") {
+                    console.log(`You win! ${humanChoice} beats ${computerChoice}!`)
+                    return 1;
+                } else if (computerChoice == "scissors") {
+                    console.log(`You lose! ${computerChoice} beats ${humanChoice}!`)
+                    return 2;
+                }
+                break;
+            case "scissors":
+                if (computerChoice == "paper") {
+                    console.log(`You win! ${humanChoice} beats ${computerChoice}!`)
+                    return 1;
+                } else if (computerChoice == "rock") {
+                    console.log(`You lose! ${computerChoice} beats ${humanChoice}!`)
+                    return 2;
+                }
+                break;
+        }
+    }
 }
-function gameRockPaperScissors() {
-    console.log("It's time for Rock, Paper or Scissors!")
-    console.log("Computer is making it's choice!")
-    console.log("Computer picked " + getComputerChoice() + "!")
-    console.log("Now it's time for you to make your choice!")
-    console.log("User picked " + getHumanChoice() + "!")
+function playGame(n) {
+    let humanScore = 0
+    let computerScore = 0
+    // const computerSelection = getComputerChoice();
+    // const humanSelection = getHumanChoice();
+    for (let i = 0; i < n; i++) {
+        winner = playRound(getHumanChoice(), getComputerChoice());
+        if (winner == 1) {
+            humanScore++;
+        } else if (winner == 2) {
+            computerScore++;
+        }
+    }
+    if (humanScore > computerScore) {
+        console.log(`Congratulations, you won! The final score of the game is User: ${humanScore} vs. Computer: ${computerScore}.`)
+    } else if (computerScore > humanScore) {
+        console.log(`Shoot, you lost! Better luck next time. The final score of the game is User: ${humanScore} vs. Computer: ${computerScore}.`)
+    } else {
+        console.log(`Oh wow, it's a tie! The final score of the game is User: ${humanScore} vs. Computer: ${computerScore}.`)
+    }
 }
 
 
-let humanScore = 0
-let computerScore = 0
-// const humanSelection = getHumanChoice();
-// const computerSelection = getComputerChoice();
-// playRound(humanSelection, computerSelection);
-gameRockPaperScissors()
+let n = 5
+console.log(`It's time for Rock, Paper or Scissors! Let's play ${n} rounds!`)
+playGame(n)
